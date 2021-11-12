@@ -1,0 +1,4 @@
+Python==3.7.7
+keras==2.4.3
+numpy==1.18.5
+pandas==1.2.4
