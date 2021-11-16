@@ -12,13 +12,14 @@ from keras.optimizers import Adam, SGD, Nadam, RMSprop
 from keras.layers.core import Dense, Activation, Dropout, Flatten
 
 from siamesenet import SiameseNetwork
-from data_utils import contrastive_loss
+from distances_utils import contrastive_loss
 
 
 # Training parameters
 batch_size = 128
 n_epochs = 999999
 checkpoint_path = "./checkpoint"
+log_path = "./log"
 validation_split = 0.2
 
 # Siamese network parameters
@@ -28,6 +29,11 @@ learning_rate = 1e-2
 
 def create_encoder_model(input_shape):
     """ Encoder network to be shared
+
+    :param input_shape: the shape of the input layer
+    :type int
+    :return: the model structure
+    :rtype: Keras Sequential model
     """
 
     # define model
@@ -52,7 +58,7 @@ def create_encoder_model(input_shape):
     return model
 
 
-""" Randomly generating training data for the Siamese network
+""" Randomly generating dummy training data for the Siamese network
 """
 
 n_examples = 7500
@@ -62,6 +68,8 @@ x_train_1 = np.random.random((n_examples, n_features))
 x_train_2 = np.random.random((n_examples, n_features))
 y_train = np.random.random((n_examples))
 
+x_test = np.random.random((n_examples, n_features))
+
 input_shape = n_features
 
 
@@ -70,8 +78,6 @@ input_shape = n_features
 
 encoder_model = create_encoder_model(input_shape)
 siamese_model = SiameseNetwork(encoder_model)
-
-
 
 
 
@@ -90,11 +96,13 @@ siamese_model.compile(loss=contrastive_loss, optimizer=adam, metrics=['mae'])
 """ Training
 """
 
-siamese_model.fit(x_train_1, x_train_2, y_train, n_epochs=n_epochs, batch_size=batch_size, validation_split=validation_split, checkpoint_path=checkpoint_path)
+siamese_model.fit(x_train_1, x_train_2, y_train, n_epochs=n_epochs, batch_size=batch_size, validation_split=validation_split, checkpoint_path=checkpoint_path, log_path=log_path)
+
 
 """ Using the trained encoder
-Extracting embeddings from test data
+Extracting new feature embeddings from test data
 """
 
-#
-#
+model = siamese_model.restore(encoder_model=encoder_model, checkpoint_path=checkpoint_path)
+print(model.summary())
+new_embeddings = model.predict(x_test)
