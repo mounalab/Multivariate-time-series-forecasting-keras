@@ -135,8 +135,10 @@ class RNN(object):
             self.build,
             objective = 'val_loss',
             max_trials = 5,
-            directory='ktuner',
             executions_per_trial = 3,
+            directory='ktuner',
+            project_name='kerastuner_bayesian_cnn',
+            overwrite=True,
             )
 
         """

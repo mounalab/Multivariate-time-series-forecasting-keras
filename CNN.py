@@ -140,10 +140,12 @@ class CNN(object):
         # Use Keras tuner for automated hyperparameters tuning
         tuner = RandomSearch(
             self.build,
-            objective = 'val_loss',
+            objective = 'loss',
             max_trials = 5,
-            directory='ktuner',
             executions_per_trial = 3,
+            directory='ktuner',
+            project_name='kerastuner_bayesian_cnn',
+            overwrite=True,
             )
 
         """
@@ -174,7 +176,7 @@ class CNN(object):
                              verbose=1,
                              callbacks=[early_stopping_monitor, checkpoint])
                              #callbacks=[PlotLossesKeras(), early_stopping_monitor, checkpoint])
-                             
+
 
     def evaluate(self,
         X_test,
