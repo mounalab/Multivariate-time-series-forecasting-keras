@@ -1,0 +1,17 @@
+{
+	"look_back" : 7,
+	"n_features" : 4,
+	"horizon" : 7,
+
+	"n_layers_init" : 2,
+	"n_layers_end" : 6,
+
+	"n_units_init" : 8,
+	"n_units_end" : 512,
+
+	"unit" : "lstm",
+
+	"log_dir" : "log",
+	"checkpoint_dir" : "checkpoint"
+
+}
