@@ -1,23 +1,23 @@
 # Multivariate Time series forecasting with Keras
 
-This project provides implementations of some deep learning algorithms for Multivariate Time Series Forecasting
-- Transformers
-- Recurrent neural networks (LSTM and GRU)
-- Convolutional neural networks
-- Multi-head multi-layer perceptron
+This project provides implementations of some deep learning algorithms for Multivariate Time Series Forecasting  
+- Transformers  
+- Recurrent neural networks (LSTM and GRU)  
+- Convolutional neural networks  
+- Multi-head multi-layer perceptron  
 
 
 ## Prequisites
 
-Prequisites is defined in requirements.txt file
+Prequisites is defined in requirements.txt file  
 
 ## Running Example
 
-A running example is implemented in __main__.py
-Used Dataset is not included in this project
-A Jupyter notebook for RNN model is also available.
+A running example is implemented in \__main__.py  
+Used Dataset is not included in this project  
+A Jupyter notebook for RNN model is also available.  
 
 ## Dataset
 
-We used the open dataset 'Household Power Consumption' available at https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption
+We used the open dataset 'Household Power Consumption' available at https://archive.ics.uci.edu/ml/datasets/individual+household+electric+power+consumption  
 Prep-processing step to get the used cleaned version are available in the tutorial https://machinelearningmastery.com/multi-step-time-series-forecasting-with-machine-learning-models-for-household-electricity-consumption/
