@@ -29,10 +29,8 @@ class CNN(object):
     """ Building the Convolutional Neural Network for Multivariate time series forecasting
     """
 
-    def __init__(self,
-        logger=None,
-        **kwargs):
-        """ Initialization of the RNN Model as TensorFlow computational graph
+    def __init__(self):
+        """ Initialization of the object
         """
 
         with open("parameters.json") as f:
@@ -56,6 +54,8 @@ class CNN(object):
 
     def build(self, hp):
         """ Build the model architecture
+        :param hp: hyperparameters tuner
+        :type Keras Tuner
         """
 
         model = Sequential()
@@ -101,6 +101,8 @@ class CNN(object):
     def restore(self,
         filepath):
         """ Restore a previously trained model
+        :param filepath: path to saved model
+        :type str
         """
 
         # Load the architecture
@@ -122,18 +124,15 @@ class CNN(object):
         epochs=200,
         batch_size=32):
         """ Training the network
-        :param X_train: features matrix
+        :param X_train: training feature vectors [#batch,#number_of_timesteps,#number_of_features]
+        :type 3-D Numpy array of float values
+        :param Y_train: training target vectors
         :type 2-D Numpy array of float values
-        :param Y_train: one-hot encoded labels matrix
-        :type 2-D Numpy array of int values
-        :param checkpoint_every: RNN model checkpoint frequency
+        :param epochs: number of training epochs
         :type int
-        :param display_step: number of training epochs executed before logging messages
+        :param batch_size: size of batches used at each forward/backward propagation
         :type int
-        :param verbose: display log messages on screen
-        :type boolean
-        :return Cost history of each training epoch
-        :rtype 1-D Numpy array of floats
+        :return -
         :raises: -
         """
 
@@ -182,9 +181,9 @@ class CNN(object):
         X_test,
         y_test):
         """ Evaluating the network
-        :param X_test: features matrix
-        :type 2-D Numpy array of float values
-        :param Y_test: one-hot encoded labels matrix
+        :param X_test: test feature vectors [#batch,#number_of_timesteps,#number_of_features]
+        :type 3-D Numpy array of float values
+        :param Y_test: test target vectors
         :type 2-D Numpy array of int values
         :return  Evaluation losses
         :rtype 5 Float tuple
